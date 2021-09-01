@@ -9,6 +9,12 @@ export type BookType = {
   customer: CustomerType
 }
 
+export type BookPostType = {
+  name: string
+  price: number
+  customerId: number
+}
+
 const url = "http://localhost:8080"
 
 export async function getBooks() {
@@ -50,8 +56,8 @@ export async function getBooksStatus(status: string) {
   return data
 }
 
-export async function postBook({ name, price }: BookType) {
-  await axios.post(`${process.env.HOST}/books`, [name, price])
+export async function postBook({ name, price, customerId }: BookPostType) {
+  await axios.post(`${process.env.HOST}/books`, [name, price, customerId])
     .then(response => {
       return response.data
     })

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Books } from "./components/Books";
+import { Header } from "./components/Header";
 import { BookType, getBooks } from "./services/book";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <Books books={books} />
     </div>
   );
