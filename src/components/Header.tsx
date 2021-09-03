@@ -1,10 +1,19 @@
 import { Grid, IconButton, InputBase, Paper, Button, Box } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from "@material-ui/icons/Search"
+import { useState } from 'react';
+import { CreateBookModal } from './CreateBookModal';
 
 export function Header() {
+  const [openModal, setOpenModal] = useState(false)
+
+  function handleOpenModal() {
+    setOpenModal(true)
+  }
+
   return (
     <header>
+      {openModal && <CreateBookModal onClose={() => setOpenModal(false)} />}
       <Grid
         container
         direction="row"
@@ -38,6 +47,7 @@ export function Header() {
             variant="contained"
             color="primary"
             startIcon={<AddIcon />}
+            onClick={() => { handleOpenModal() }}
           >Create</Button>
         </Grid>
       </Grid>

@@ -11,7 +11,7 @@ export type BookType = {
 
 export type BookPostType = {
   name: string
-  price: number
+  price: string
   customerId: number
 }
 
@@ -32,7 +32,7 @@ export async function getBooks() {
 
 export async function getBook(id: number) {
   const data: BookType[] =
-    await axios.get(`${process.env.HOST}/books/${id}`)
+    await axios.get(`${url}/books/${id}`)
       .then(response => {
         return response.data
       })
@@ -45,7 +45,7 @@ export async function getBook(id: number) {
 
 export async function getBooksStatus(status: string) {
   const data: BookType[] =
-    await axios.get(`${process.env.HOST}/books/${status}`)
+    await axios.get(`${url}/books/${status}`)
       .then(response => {
         return response.data
       })
@@ -57,7 +57,7 @@ export async function getBooksStatus(status: string) {
 }
 
 export async function postBook({ name, price, customerId }: BookPostType) {
-  await axios.post(`${process.env.HOST}/books`, [name, price, customerId])
+  await axios.post(`${url}/books`, [name, price, customerId])
     .then(response => {
       return response.data
     })
@@ -67,11 +67,11 @@ export async function postBook({ name, price, customerId }: BookPostType) {
 }
 
 /*export const putCustomer: (customer: CustomerType) => void = customer => {
-  axios.put(`${process.env.HOST}/customers/${customer.id}`, [customer.name, customer.email])
+  axios.put(`${url}/customers/${customer.id}`, [customer.name, customer.email])
 }*/
 
 export async function deleteBook(id: number) {
-  await axios.delete(`${process.env.HOST}/books/${id}`)
+  await axios.delete(`${url}/books/${id}`)
     .then(response => {
       return response.data
     })
