@@ -1,14 +1,16 @@
 import axios from 'axios'
 
 export type CustomerType = {
-  id: number
+  id?: number
   name: string
   email: string
 }
 
+const url = "http://localhost:8080"
+
 export async function getCustomers() {
   const data: CustomerType[] =
-    await axios.get(`${process.env.DEFAULT_HOST}/customers`)
+    await axios.get(`${url}/customers`)
       .then(response => {
         return response.data
       })

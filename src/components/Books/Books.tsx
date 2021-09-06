@@ -1,4 +1,5 @@
-import { BookType } from "../services/book";
+import { BookType } from "../../services/book";
+import './style.css'
 
 type BooksType = {
   books: BookType[]
@@ -6,7 +7,7 @@ type BooksType = {
 
 export function Books({ books }: BooksType) {
   return (
-    <div>
+    <div className="book--container">
       {
         books.map(book => {
           return (

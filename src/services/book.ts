@@ -11,7 +11,7 @@ export type BookType = {
 
 export type BookPostType = {
   name: string
-  price: string
+  price: number
   customerId: number
 }
 
@@ -57,7 +57,11 @@ export async function getBooksStatus(status: string) {
 }
 
 export async function postBook({ name, price, customerId }: BookPostType) {
-  await axios.post(`${url}/books`, [name, price, customerId])
+  await axios.post(`${url}/books`, {
+    name: name,
+    price: price,
+    customer_id: customerId
+  })
     .then(response => {
       return response.data
     })

@@ -2,34 +2,31 @@ import { Grid, IconButton, InputBase, Paper, Button, Box } from '@material-ui/co
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from "@material-ui/icons/Search"
 import { useState } from 'react';
-import { CreateBookModal } from './CreateBookModal';
+import { CreateBookModal } from '../Modal/CreateBookModal';
+
+import './style.css'
 
 export function Header() {
   const [openModal, setOpenModal] = useState(false)
 
-  function handleOpenModal() {
-    setOpenModal(true)
-  }
-
   return (
-    <header>
+    <header className="header">
       {openModal && <CreateBookModal onClose={() => setOpenModal(false)} />}
       <Grid
         container
         direction="row"
         justifyContent="center"
         alignItems="center"
-        spacing={3}
       >
         <Grid item xs={2}>
-          <Box display="flex" justifyContent="center">
-            <img style={{ justifyContent: "center" }} src="" alt="Logo" />
+          <Box display="flex" justifyContent="center" >
+            <img className="header--logo" src="" alt="Logo" />
           </Box>
         </Grid>
 
         <Grid item xs={6}>
-          <Paper component="form" style={{ display: "flex", alignItems: "center" }}>
-            <InputBase style={{ flex: 1, padding: "0px 12px" }} placeholder="Digite o nome do livro" />
+          <Paper component="form" className="header--label">
+            <InputBase className="header--label--input" placeholder="Digite o nome do livro" />
             <IconButton>
               <SearchIcon />
             </IconButton>
@@ -47,7 +44,7 @@ export function Header() {
             variant="contained"
             color="primary"
             startIcon={<AddIcon />}
-            onClick={() => { handleOpenModal() }}
+            onClick={() => { setOpenModal(true) }}
           >Create</Button>
         </Grid>
       </Grid>

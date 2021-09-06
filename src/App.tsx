@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { Books } from "./components/Books";
-import { Header } from "./components/Header";
+import { Books } from "./components/Books/Books";
+import { Header } from "./components/Header/Header";
 import { BookType, getBooks } from "./services/book";
 
 function App() {
-  const [loading, setLoading] = useState(true)
   const [books, setBooks] = useState<BookType[]>([])
 
   useEffect(() => {
