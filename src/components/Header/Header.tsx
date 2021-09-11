@@ -19,7 +19,7 @@ export function Header() {
         alignItems="center"
       >
         <Grid item xs={2}>
-          <Box display="flex" justifyContent="center" >
+          <Box className="header--item--box" display="flex" justifyContent="center" >
             <img className="header--logo" src="" alt="Logo" />
           </Box>
         </Grid>
@@ -40,12 +40,14 @@ export function Header() {
         </Grid>
 
         <Grid item xs={2}>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<AddIcon />}
-            onClick={() => { setOpenModal(true) }}
-          >Create</Button>
+          <Box display="flex" justifyContent="center">
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<AddIcon />}
+              onClick={() => { setOpenModal(true) }}
+            >Create</Button>
+          </Box>
         </Grid>
       </Grid>
     </header>

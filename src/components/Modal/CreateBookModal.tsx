@@ -67,7 +67,7 @@ export function CreateBookModal({ onClose = () => { } }: ModalOpenType) {
       priceError: false
     })
 
-    if (book.name.trim() === '') {
+    if (book.name.trim().length < 4) {
       setErrors(prevState => {
         return {
           ...prevState,
@@ -106,6 +106,8 @@ export function CreateBookModal({ onClose = () => { } }: ModalOpenType) {
         price: parseFloat(book.price),
         customerId: parseInt(book.customerId)
       }
+
+      console.log(inputPostBook)
 
       await postBook(inputPostBook)
 
@@ -149,7 +151,7 @@ export function CreateBookModal({ onClose = () => { } }: ModalOpenType) {
           })}
           value={book.name}
           error={errors.nameError}
-          helperText={errors.nameError && "Porfavor, insira o nome do livro."}
+          helperText={errors.nameError && "Porfavor, insira um nome com mais de 3 caracteres."}
         />
         <TextField
           margin="dense"

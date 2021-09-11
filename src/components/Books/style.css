@@ -1,3 +1,10 @@
 .book--container {
-  padding-block: 30px;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.book {
+  border: 2px solid black;
 }
