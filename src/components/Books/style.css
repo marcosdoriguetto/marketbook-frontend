@@ -1,10 +1,63 @@
 .book--container {
   padding: 2rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
 
 .book {
-  border: 2px solid black;
+  position: relative;
+  padding: 1.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #CFCFCF;
+  transition: 0.1s ease-in;
+}
+
+.book:hover {
+  transform: scale(1.05);
+}
+
+.image--container {
+  display: flex;
+  justify-content: center;
+}
+
+.image--container img {
+  border-radius: 5px;
+}
+
+.information--container {
+  padding: 0.5rem 0.5rem 0;
+  text-align: center;
+}
+
+.book--price--container {
+  position: absolute;
+  padding-bottom: 0.3rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.book--name {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.book--author {
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: gray;
+  padding-bottom: 1rem;
+}
+
+.book--price--symbol, .book--price--decimal-value {
+  position: relative;
+  top: -.5rem;
+  font-size: 1rem;
+}
+
+.book--price--integer-value {
+  font-size: 1.6rem;
 }

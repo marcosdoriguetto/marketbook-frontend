@@ -1,3 +1,12 @@
+.header {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #CFCFCF;
+}
+
+.header--container {
+  gap: 0.5rem;
+}
+
 .header--logo {
   justify-content: center;
 }

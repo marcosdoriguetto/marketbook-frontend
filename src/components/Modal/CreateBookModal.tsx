@@ -21,12 +21,6 @@ type ModalOpenType = {
   onClose: () => void
 }
 
-type ErrorsType = {
-  name: string,
-  price: string,
-  customerId: string
-}
-
 type BookFormType = {
   name: string
   price: string
@@ -107,8 +101,6 @@ export function CreateBookModal({ onClose = () => { } }: ModalOpenType) {
         customerId: parseInt(book.customerId)
       }
 
-      console.log(inputPostBook)
-
       await postBook(inputPostBook)
 
       setBook({
@@ -181,6 +173,7 @@ export function CreateBookModal({ onClose = () => { } }: ModalOpenType) {
           })}>
             <option value={0}></option>
             {
+              customers.length > 0 &&
               customers.map(customer => {
                 return (
                   <option
