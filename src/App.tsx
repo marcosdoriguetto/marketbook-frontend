@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Books } from "./components/Books/Books";
 import { Header } from "./components/Header/Header";
-import { Book } from "./pages/Book";
+import { Book } from "./pages/BookPage/Book";
 import { BookType, getBooks } from "./services/book";
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
   function handlerSortSearch() {
     if (search.length > 0) {
       let bookFilter: BookType[] = []
-      search.length > 0 && (
+      books.length > 0 && (
         books.filter(book => {
           if (book.name.toLowerCase().includes(search.toLowerCase())) {
             return bookFilter.push(book)
@@ -41,7 +41,6 @@ function App() {
     } else {
       setSortSearch(false)
     }
-
   }
 
   return (
@@ -49,7 +48,7 @@ function App() {
       <Header handlerChange={handlerEvent} handlerSetSort={handlerSortSearch} />
       <Switch>
         <Route path="/" exact render={() => <Books books={sortSearch ? booksSearch : books} />} />
-        <Route path="/book" exact component={Book} />
+        <Route path="/book/:id" render={props => <Book id={props.location.pathname} />} />
       </Switch>
     </BrowserRouter>
   );

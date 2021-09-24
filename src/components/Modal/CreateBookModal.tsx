@@ -163,7 +163,7 @@ export function CreateBookModal({ onClose = () => { } }: ModalOpenType) {
           error={errors.priceError}
           helperText={errors.priceError && "Porfavor, insira o valor do livro."}
         />
-        <FormControl fullWidth error={errors.customerError}>
+        <FormControl margin="dense" fullWidth error={errors.customerError}>
           <InputLabel>Cliente</InputLabel>
           <NativeSelect value={parseInt(book.customerId)} onChange={event => setBook(prevState => {
             return {
@@ -171,7 +171,7 @@ export function CreateBookModal({ onClose = () => { } }: ModalOpenType) {
               customerId: event.target.value
             }
           })}>
-            <option value={0}></option>
+            <option value={0}>Selecione um customer</option>
             {
               customers.length > 0 &&
               customers.map(customer => {
@@ -186,14 +186,15 @@ export function CreateBookModal({ onClose = () => { } }: ModalOpenType) {
               })
             }
           </NativeSelect>
+          {errors.customerError && <p className={"MuiFormHelperText-root Mui-error MuiFormHelperText-marginDense"}>Porfavor, selecione um customer</p>}
         </FormControl>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => onClose()} variant="contained" color="primary">
+        <Button onClick={() => onClose()} variant="outlined" color="primary">
           Cancel
         </Button>
         <Button onClick={() => handleValidateForm()} variant="contained" color="primary">
-          Criar
+          Create
         </Button>
       </DialogActions>
     </Dialog>
