@@ -24,14 +24,20 @@ export async function getBooks() {
         return response.data
       })
       .catch(error => {
-        console.log(error)
-        return {
-          id: null,
-          name: null,
-          price: null,
-          status: null,
-          customer: null,
-        }
+        return error
+      })
+
+  return data
+}
+
+export async function getBooksByName(name: String) {
+  const data: BookType[] =
+    await axios.get(`${url}/books?name=${name}`)
+      .then(response => {
+        return response.data
+      })
+      .catch(error => {
+        return error
       })
 
   return data

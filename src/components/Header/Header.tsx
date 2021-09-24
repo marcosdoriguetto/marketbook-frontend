@@ -8,13 +8,13 @@ import { CreateBookModal } from '../Modal/CreateBookModal';
 
 import './style.css'
 
-type SearchType = {
-  handlerChange: (event: ChangeEvent<HTMLInputElement>) => void
-  handlerSetSort: () => void
-}
-
-export function Header({ handlerChange = () => { }, handlerSetSort = () => { } }: SearchType) {
+export function Header() {
   const [openModal, setOpenModal] = useState(false)
+  const [search, setSearch] = useState('')
+
+  function handlerChangeSearch(event: ChangeEvent<HTMLInputElement>) {
+    setSearch(event.target.value)
+  }
 
   return (
     <header className="header">
@@ -34,9 +34,9 @@ export function Header({ handlerChange = () => { }, handlerSetSort = () => { } }
 
         <Grid item xs={6}>
           <Paper component="form" className="header--label">
-            <InputBase onChange={handlerChange} className="header--label--input" placeholder="Digite o nome do livro" />
-            <Link to="/">
-              <IconButton onClick={handlerSetSort}>
+            <InputBase onChange={handlerChangeSearch} className="header--label--input" placeholder="Digite o nome do livro" />
+            <Link to={`/books/name?name=${search}`}>
+              <IconButton>
                 <SearchIcon />
               </IconButton>
             </Link>

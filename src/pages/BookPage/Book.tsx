@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { Loading } from "../../components/Loading/Loading";
 import { BookType, getBook } from "../../services/book";
 import { Error } from "../ErrorPage/Error";
 
-type BookIdType = {
-  id: String
-}
-
-export function Book({ id }: BookIdType) {
-  const bookId = id.split('/')
+export function Book() {
+  const { id } = useParams<{ id?: string }>()
   const [book, setBook] = useState<BookType>({
     id: 0,
     name: "",
@@ -19,46 +17,49 @@ export function Book({ id }: BookIdType) {
       name: ""
     }
   })
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(true)
 
   useEffect(() => {
     async function fetchBook() {
-      const getBookId: BookType = await getBook(parseInt(bookId[2]))
+      const getBookId: BookType = await getBook(parseInt(id!!))
       if (getBookId.id !== undefined) {
         setError(false)
         setBook(getBookId)
       }
+      setLoading(false)
     }
 
     fetchBook()
-  }, [])
+  }, [id])
 
   return (
     <>
-      {
-        error ? (
-          <Error />
-        ) : (
-          <main className="container">
-            <section className="container--image">
-              <img src="" alt={`Livro ${book.name}`} />
-            </section>
-            <section className="container--informations">
-              <div className="container--informations--header">
-                <h1>{book.name}</h1>
-                <div>
-                  Edição Português
-                  <i></i>
-                  por {book.customer.name}
+      {loading ? <Loading /> : (
+        <>
+          {!error ? (
+            <main className="container">
+              <section className="container--image">
+                <img src="" alt={`Livro ${book.name}`} />
+              </section>
+              <section className="container--informations">
+                <div className="container--informations--header">
+                  <h1>{book.name}</h1>
+                  <div>
+                    Edição Português
+                    <i></i>
+                    por {book.customer.name}
+                  </div>
                 </div>
-              </div>
 
-              <div className="container--informations--header">
-                RESUMO
-              </div>
-            </section>
-          </main>
-        )
+                <div className="container--informations--header">
+                  RESUMO
+                </div>
+              </section>
+            </main>
+          ) : <Error />}
+        </>
+      )
       }
     </>
   )
