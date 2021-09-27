@@ -1,11 +1,28 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useLocation, useParams } from "react-router";
 import { Loading } from "../../components/Loading/Loading";
 import { BookType, getBook } from "../../services/book";
 import { Error } from "../ErrorPage/Error";
 
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+import ImageDefault from '../../assets/images/245x346.jpg'
+
+import './style.css'
+import { Link } from "react-router-dom";
+
+type ParamsType = {
+  id?: string
+}
+
+type LocationType = {
+  from: {
+    pathname: string
+  }
+}
+
 export function Book() {
-  const { id } = useParams<{ id?: string }>()
+  const { id } = useParams<ParamsType>()
+  const history = useHistory()
   const [book, setBook] = useState<BookType>({
     id: 0,
     name: "",
@@ -22,8 +39,8 @@ export function Book() {
 
   useEffect(() => {
     async function fetchBook() {
-      const getBookId: BookType = await getBook(parseInt(id!!))
-      if (getBookId.id !== undefined) {
+      if (id !== undefined) {
+        const getBookId: BookType = await getBook(parseInt(id))
         setError(false)
         setBook(getBookId)
       }
@@ -34,13 +51,19 @@ export function Book() {
   }, [id])
 
   return (
-    <>
+    <div className="content--container">
       {loading ? <Loading /> : (
         <>
+          <div className="header--backPage">
+            <ArrowBackIcon fontSize="inherit" className="link--color--gray" />
+            <span className="link--backPage" onClick={() => history.goBack()}>
+              Voltar aos resultados
+            </span>
+          </div>
           {!error ? (
             <main className="container">
               <section className="container--image">
-                <img src="" alt={`Livro ${book.name}`} />
+                <img src={ImageDefault} alt={`Livro ${book.name}`} />
               </section>
               <section className="container--informations">
                 <div className="container--informations--header">
@@ -61,6 +84,6 @@ export function Book() {
         </>
       )
       }
-    </>
+    </div>
   )
 }

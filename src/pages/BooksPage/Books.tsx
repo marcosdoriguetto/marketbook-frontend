@@ -12,7 +12,6 @@ export function Books() {
     async function fetchBooks() {
       setLoading(true)
       const dataBooks = await getBooks()
-      console.log(dataBooks)
 
       setBooks(dataBooks)
       setLoading(false)

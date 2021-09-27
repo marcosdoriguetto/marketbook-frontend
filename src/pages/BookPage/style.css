@@ -1,0 +1,21 @@
+.header--backPage {
+  padding-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.link--backPage {
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: gray;
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.link--backPage:hover {
+  text-decoration: underline;
+}
+
+.link--color--gray, .link--backPage {
+  color: #565959;
+}

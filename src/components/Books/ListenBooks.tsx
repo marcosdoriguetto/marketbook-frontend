@@ -11,7 +11,7 @@ type BooksType = {
 
 export function ListenBooks({ books }: BooksType) {
   return (
-    <div className="book--container">
+    <div className="book--container content--container">
       {
         books.map(book => {
           const numberFormat = book.price.toString().split('.')
@@ -21,9 +21,11 @@ export function ListenBooks({ books }: BooksType) {
                 <div className="image--container">
                   <img src={ImageDefault} alt="Default" />
                 </div>
+
                 <div className="information--container">
                   <h2 className="book--name">{book.name.charAt(0).toUpperCase() + book.name.slice(1)}</h2>
                   <h1 className="book--author">{book.customer.name}</h1>
+
                   <div className="book--price--container">
                     <div>
                       <span className="book--price--symbol">R$</span>
@@ -31,7 +33,6 @@ export function ListenBooks({ books }: BooksType) {
                       <span className="book--price--decimal-value">{numberFormat[1] ? numberFormat[1].padEnd(2, '0') : "00"}</span>
                     </div>
                   </div>
-
                 </div>
               </div>
             </Link>

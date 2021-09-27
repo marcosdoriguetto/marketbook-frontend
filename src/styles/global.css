@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  padding: 10px 0;
+  padding: 1rem 0;
   font-size: 16px;
 }
 
@@ -21,4 +21,8 @@ a {
 
 a:focus, a:hover, a:visited, a:link, a:active {
   text-decoration: none;
+}
+
+.content--container {
+  padding: 2rem;
 }
