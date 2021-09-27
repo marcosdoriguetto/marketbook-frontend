@@ -35,7 +35,7 @@ export function Header() {
         <Grid item xs={6}>
           <Paper component="form" className="header--label">
             <InputBase onChange={handlerChangeSearch} className="header--label--input" placeholder="Digite o nome do livro" />
-            <Link to={`/books/name?name=${search}`}>
+            <Link to={search.length > 0 ? `/books/name?name=${search}` : '/'}>
               <IconButton>
                 <SearchIcon />
               </IconButton>

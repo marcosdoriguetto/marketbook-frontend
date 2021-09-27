@@ -19,3 +19,14 @@
 .link--color--gray, .link--backPage {
   color: #565959;
 }
+
+.container {
+  display: flex;
+  gap: 4rem;
+}
+
+.container--image img{
+  box-shadow: 0 2px 5px 1px rgba(0,0,0,.3);
+  border-radius: 3px;
+  border: 1px solid #CFCFCF;
+}

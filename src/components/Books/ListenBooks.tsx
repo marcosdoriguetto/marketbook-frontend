@@ -3,6 +3,7 @@ import { BookType } from "../../services/book";
 
 import ImageDefault from '../../assets/images/182x274.jpg'
 import './style.css'
+import { capitalizeName } from "../../utils/capitalizeName";
 
 
 type BooksType = {
@@ -15,6 +16,8 @@ export function ListenBooks({ books }: BooksType) {
       {
         books.map(book => {
           const numberFormat = book.price.toString().split('.')
+          const nameBook = capitalizeName(book.name)
+          const nameCustomer = capitalizeName(book.customer.name)
           return (
             <Link to={`/book/${book.id}`}>
               <div className="book" key={book.id}>
@@ -23,8 +26,8 @@ export function ListenBooks({ books }: BooksType) {
                 </div>
 
                 <div className="information--container">
-                  <h2 className="book--name">{book.name.charAt(0).toUpperCase() + book.name.slice(1)}</h2>
-                  <h1 className="book--author">{book.customer.name}</h1>
+                  <h2 className="book--name">{nameBook}</h2>
+                  <h1 className="book--author">{nameCustomer}</h1>
 
                   <div className="book--price--container">
                     <div>
