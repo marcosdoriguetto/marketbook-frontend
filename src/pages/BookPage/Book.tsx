@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router";
 import { Loading } from "../../components/Loading/Loading";
 import { BookType, getBook } from "../../services/book";
 import { Error } from "../ErrorPage/Error";
+import { Divider } from "@material-ui/core";
 
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import ImageDefault from '../../assets/images/245x346.jpg'
@@ -66,14 +67,14 @@ export function Book() {
               <section className="container--informations">
                 <div className="container--informations--header">
                   <h1>{bookName}</h1>
-                  <div>
+                  <div className="container--informations--book">
                     Edição Português
-                    <i></i>
+                    <Divider orientation="vertical" variant="middle" flexItem />
                     por {customerName}
                   </div>
                 </div>
-
-                <div className="container--informations--header">
+                <Divider />
+                <div className="container--informations--body">
                   RESUMO
                 </div>
               </section>

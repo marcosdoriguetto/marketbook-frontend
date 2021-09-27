@@ -30,3 +30,18 @@
   border-radius: 3px;
   border: 1px solid #CFCFCF;
 }
+
+.container--informations {
+  width: 100%;
+}
+
+.container--informations--book {
+  display: flex;
+  align-items: center;
+  padding-block: 0.5rem;
+  font-size: 14px;
+}
+
+.container--informations--body {
+  padding-block: 1rem;
+}
