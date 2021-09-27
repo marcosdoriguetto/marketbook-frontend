@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
-
 import { Grid, IconButton, InputBase, Paper, Button, Box } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from "@material-ui/icons/Search"
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import { CreateBookModal } from '../Modal/CreateBookModal';
 
 import './style.css'
@@ -12,8 +12,20 @@ export function Header() {
   const [openModal, setOpenModal] = useState(false)
   const [search, setSearch] = useState('')
 
+  const history = useHistory()
+
   function handlerChangeSearch(event: ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value)
+  }
+
+  function handlerSendSearch(event: FormEvent) {
+    event.preventDefault()
+
+    if (search.length > 0) {
+      history.push(`/books/book?name=${search}`)
+    } else {
+      history.push('/')
+    }
   }
 
   return (
@@ -28,18 +40,16 @@ export function Header() {
       >
         <Grid item xs={2}>
           <Box className="header--item--box">
-            <img className="header--logo" src="" alt="Logo" />
+            <Link to="/"><img className="header--logo" src="" alt="Logo" /></Link>
           </Box>
         </Grid>
 
         <Grid item xs={6}>
-          <Paper component="form" className="header--label">
+          <Paper component="form" className="header--label" onSubmit={handlerSendSearch}>
             <InputBase onChange={handlerChangeSearch} className="header--label--input" placeholder="Digite o nome do livro" />
-            <Link to={search.length > 0 ? `/books/name?name=${search}` : '/'}>
-              <IconButton>
-                <SearchIcon />
-              </IconButton>
-            </Link>
+            <IconButton type="submit">
+              <SearchIcon />
+            </IconButton>
           </Paper>
         </Grid>
 
