@@ -1,6 +1,10 @@
 import axios from 'axios'
 import { CustomerType } from './customer'
 
+type BookResponse = {
+  content: BookType[]
+}
+
 export type BookType = {
   id: number
   name: string
@@ -18,7 +22,7 @@ export type BookPostType = {
 const url = "http://localhost:8080"
 
 export async function getBooks() {
-  const data: BookType[] =
+  const data: BookResponse =
     await axios.get(`${url}/books`)
       .then(response => {
         return response.data
@@ -27,12 +31,12 @@ export async function getBooks() {
         return error
       })
 
-  return data
+  return data.content
 }
 
-export async function getBooksByName(name: String) {
-  const data: BookType[] =
-    await axios.get(`${url}/books?name=${name}`)
+export async function getBooksByName(name: String, page: number) {
+  const data: BookResponse =
+    await axios.get(`${url}/books?name=${name}&page=${page}`)
       .then(response => {
         return response.data
       })
@@ -40,7 +44,7 @@ export async function getBooksByName(name: String) {
         return error
       })
 
-  return data
+  return data.content
 }
 
 export async function getBook(id: number) {
@@ -57,7 +61,7 @@ export async function getBook(id: number) {
 }
 
 export async function getBooksStatus(status: string) {
-  const data: BookType[] =
+  const data: BookResponse =
     await axios.get(`${url}/books/${status}`)
       .then(response => {
         return response.data
@@ -66,7 +70,7 @@ export async function getBooksStatus(status: string) {
         return error
       })
 
-  return data
+  return data.content
 }
 
 export async function postBook({ name, price, customerId }: BookPostType) {

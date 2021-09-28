@@ -10,15 +10,17 @@ export function BooksSearch() {
     return new URLSearchParams(useLocation().search)
   }
 
-  const query = useQuery().get("name")
+  const queryName = useQuery().get("name")
+  const queryPage = useQuery().get("page")
+
   const [books, setBooks] = useState<BookType[]>([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     async function fetchBooks() {
       setLoading(true)
-      if (query) {
-        const dataBooks = await getBooksByName(query)
+      if (queryName && queryPage) {
+        const dataBooks = await getBooksByName(queryName, parseInt(queryPage))
         setBooks(dataBooks)
       }
 
@@ -26,7 +28,7 @@ export function BooksSearch() {
     }
 
     fetchBooks()
-  }, [query])
+  }, [queryName])
 
   return (
     <>

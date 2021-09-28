@@ -19,8 +19,8 @@ export function ListenBooks({ books }: BooksType) {
           const nameBook = capitalizeName(book.name)
           const nameCustomer = capitalizeName(book.customer.name)
           return (
-            <Link to={`/book/${book.id}`}>
-              <div className="book" key={book.id}>
+            <Link key={book.id} to={`/book/${book.id}`}>
+              <div className="book">
                 <div className="image--container">
                   <img src={ImageDefault} alt="Default" />
                 </div>
