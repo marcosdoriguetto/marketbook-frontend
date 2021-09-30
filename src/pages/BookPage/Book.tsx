@@ -30,17 +30,17 @@ export function Book() {
       name: ""
     }
   })
-  const bookName = capitalizeName(book.name)
-  const customerName = capitalizeName(book.customer.name)
 
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(true)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     async function fetchBook() {
       if (id !== undefined) {
         const getBookId: BookType = await getBook(parseInt(id))
-        setError(false)
+        if (!getBookId) {
+          setError(true)
+        }
         setBook(getBookId)
       }
       setLoading(false)
@@ -50,39 +50,46 @@ export function Book() {
   }, [id])
 
   return (
-    <div className="content--container">
-      {loading ? <Loading /> : (
-        <>
-          <div className="header--backPage">
-            <ArrowBackIcon fontSize="inherit" className="link--color--gray" />
-            <span className="link--backPage" onClick={() => history.goBack()}>
-              Voltar aos resultados
-            </span>
-          </div>
-          {!error ? (
-            <main className="container">
-              <section className="container--image">
-                <img src={ImageDefault} alt={`Livro ${bookName}`} />
-              </section>
-              <section className="container--informations">
-                <div className="container--informations--header">
-                  <h1>{bookName}</h1>
-                  <div className="container--informations--book">
-                    Edição Português
-                    <Divider orientation="vertical" variant="middle" flexItem />
-                    por {customerName}
+    <>
+      {
+        loading ? <Loading /> : (
+          <>
+            {
+              !error ? (
+                book.id ? (
+                  <div className="content--container">
+                    <div className="header--backPage">
+                      <ArrowBackIcon fontSize="inherit" className="link--color--gray" />
+                      <span className="link--backPage" onClick={() => history.goBack()}>
+                        Voltar aos resultados
+                      </span>
+                    </div>
+                    <main className="container">
+                      <section className="container--image">
+                        <img src={ImageDefault} alt={`Livro ${capitalizeName(book.name)}`} />
+                      </section>
+                      <section className="container--informations">
+                        <div className="container--informations--header">
+                          <h1>{capitalizeName(book.name)}</h1>
+                          <div className="container--informations--book">
+                            Edição Português
+                            <Divider orientation="vertical" variant="middle" flexItem />
+                            por {capitalizeName(book.customer.name)}
+                          </div>
+                        </div>
+                        <Divider />
+                        <div className="container--informations--body">
+                          RESUMO
+                        </div>
+                      </section>
+                    </main>
                   </div>
-                </div>
-                <Divider />
-                <div className="container--informations--body">
-                  RESUMO
-                </div>
-              </section>
-            </main>
-          ) : <Error />}
-        </>
-      )
+                ) : <Error errorId={2} />
+              ) : <Error errorId={1} />
+            }
+          </>
+        )
       }
-    </div>
+    </>
   )
 }

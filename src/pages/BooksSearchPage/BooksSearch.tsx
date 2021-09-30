@@ -28,7 +28,7 @@ export function BooksSearch() {
     }
 
     fetchBooks()
-  }, [queryName])
+  }, [queryName, queryPage])
 
   return (
     <>
@@ -36,9 +36,11 @@ export function BooksSearch() {
         loading ? <Loading /> : (
           <>
             {
-              books.length > 0 ? (
+              books ? (books.length > 0 ? (
                 <ListenBooks books={books} />
-              ) : <Error />
+              ) : <Error errorId={2} />
+              ) : <Error errorId={1} />
+
             }
           </>
         )

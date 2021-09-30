@@ -25,10 +25,10 @@ export function Books() {
       {
         loading ? <Loading /> : (
           <>
-            {
-              books.length > 0 ? (
+            {books ?
+              (books.length > 0 ? (
                 <ListenBooks books={books} />
-              ) : <Error />
+              ) : <Error errorId={2} />) : <Error errorId={1} />
             }
           </>
 

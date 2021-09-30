@@ -54,7 +54,10 @@ export async function getBook(id: number) {
         return response.data
       })
       .catch(error => {
-        return error
+        if (error.response !== undefined) {
+          return error.response.status
+        }
+        return false
       })
 
   return data
