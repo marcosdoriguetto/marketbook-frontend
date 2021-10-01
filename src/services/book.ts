@@ -1,8 +1,12 @@
 import axios from 'axios'
 import { CustomerType } from './customer'
 
-type BookResponse = {
+export type BookResponse = {
   content: BookType[]
+  totalPages: number
+  number: number
+  first: boolean
+  last: boolean
 }
 
 export type BookType = {
@@ -21,9 +25,9 @@ export type BookPostType = {
 
 const url = "http://localhost:8080"
 
-export async function getBooks() {
+export async function getBooks(page?: number) {
   const data: BookResponse =
-    await axios.get(`${url}/books`)
+    await axios.get(`${url}/books?page=${page}`)
       .then(response => {
         return response.data
       })
@@ -31,7 +35,7 @@ export async function getBooks() {
         return error
       })
 
-  return data.content
+  return data
 }
 
 export async function getBooksByName(name: String, page: number) {

@@ -1,3 +1,4 @@
+import { Pagination } from "@material-ui/lab"
 import { useEffect, useState } from "react"
 import { ListenBooks } from "../../components/Books/ListenBooks"
 import { Loading } from "../../components/Loading/Loading"
@@ -5,20 +6,35 @@ import { BookType, getBooks } from "../../services/book"
 import { Error } from "../ErrorPage/Error"
 
 export function Books() {
-  const [books, setBooks] = useState<BookType[]>([])
+  const [books, setBooks] = useState<BookType[]>()
   const [loading, setLoading] = useState(false)
+  const [pageNumber, setPageNumber] = useState(0)
+  const [totalPages, setTotalPages] = useState(0)
 
   useEffect(() => {
     async function fetchBooks() {
       setLoading(true)
       const dataBooks = await getBooks()
 
-      setBooks(dataBooks)
+      setTotalPages(dataBooks.totalPages)
+      setPageNumber(dataBooks.number)
+
+      setBooks(dataBooks.content)
       setLoading(false)
     }
 
     fetchBooks()
   }, [])
+
+  const numberPage = async (page: number) => {
+    setLoading(true)
+    const dataBooks = await getBooks(page - 1)
+    setPageNumber(dataBooks.number)
+
+    setBooks(dataBooks.content)
+    setLoading(false)
+  }
+
 
   return (
     <>
@@ -30,6 +46,13 @@ export function Books() {
                 <ListenBooks books={books} />
               ) : <Error errorId={2} />) : <Error errorId={1} />
             }
+            <Pagination
+              shape="rounded"
+              color="primary"
+              page={pageNumber + 1}
+              onChange={(event, page) => numberPage(page)}
+              count={totalPages}
+            />
           </>
 
         )
