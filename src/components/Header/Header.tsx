@@ -22,7 +22,7 @@ export function Header() {
     event.preventDefault()
 
     if (search.length > 0) {
-      history.push(`/books/book?name=${search}&page=0`)
+      history.push(`/books/book?name=${search}`)
     } else {
       history.push('/')
     }

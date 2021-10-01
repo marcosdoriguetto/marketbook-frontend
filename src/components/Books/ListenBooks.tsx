@@ -12,7 +12,7 @@ type BooksType = {
 
 export function ListenBooks({ books }: BooksType) {
   return (
-    <div className="book--container content--container">
+    <div className="book--container">
       {
         books.map(book => {
           const numberFormat = book.price.toString().split('.')

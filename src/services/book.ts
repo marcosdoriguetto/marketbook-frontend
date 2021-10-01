@@ -38,7 +38,7 @@ export async function getBooks(page?: number) {
   return data
 }
 
-export async function getBooksByName(name: String, page: number) {
+export async function getBooksByName(name: String, page?: number) {
   const data: BookResponse =
     await axios.get(`${url}/books?name=${name}&page=${page}`)
       .then(response => {
@@ -48,7 +48,7 @@ export async function getBooksByName(name: String, page: number) {
         return error
       })
 
-  return data.content
+  return data
 }
 
 export async function getBook(id: number) {

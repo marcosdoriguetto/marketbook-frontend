@@ -43,16 +43,22 @@ export function Books() {
           <>
             {books ?
               (books.length > 0 ? (
-                <ListenBooks books={books} />
+                <div className="content--container">
+                  <ListenBooks books={books} />
+
+                  {
+                    totalPages > 1 && <Pagination
+                      shape="rounded"
+                      color="primary"
+                      page={pageNumber + 1}
+                      onChange={(event, page) => numberPage(page)}
+                      count={totalPages}
+                    />
+                  }
+                </div>
+
               ) : <Error errorId={2} />) : <Error errorId={1} />
             }
-            <Pagination
-              shape="rounded"
-              color="primary"
-              page={pageNumber + 1}
-              onChange={(event, page) => numberPage(page)}
-              count={totalPages}
-            />
           </>
 
         )
