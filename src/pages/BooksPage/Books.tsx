@@ -17,9 +17,9 @@ export function Books() {
       const dataBooks = await getBooks()
 
       setTotalPages(dataBooks.totalPages)
-      setPageNumber(dataBooks.number)
+      setPageNumber(dataBooks.currentPage)
 
-      setBooks(dataBooks.content)
+      setBooks(dataBooks.item)
       setLoading(false)
     }
 
@@ -29,9 +29,9 @@ export function Books() {
   const numberPage = async (page: number) => {
     setLoading(true)
     const dataBooks = await getBooks(page - 1)
-    setPageNumber(dataBooks.number)
+    setPageNumber(dataBooks.currentPage)
 
-    setBooks(dataBooks.content)
+    setBooks(dataBooks.item)
     setLoading(false)
   }
 

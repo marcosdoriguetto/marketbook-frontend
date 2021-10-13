@@ -14,7 +14,6 @@ export function BooksSearch() {
   }
 
   const queryName = useQuery().get("name")
-  console.log(queryName)
 
   const [books, setBooks] = useState<BookType[]>([])
   const [loading, setLoading] = useState(false)
@@ -28,9 +27,9 @@ export function BooksSearch() {
       if (queryName) {
         const dataBooks = await getBooksByName(queryName)
 
-        setPageNumber(dataBooks.number)
+        setPageNumber(dataBooks.currentPage)
         setTotalPages(dataBooks.totalPages)
-        setBooks(dataBooks.content)
+        setBooks(dataBooks.item)
       }
 
       setLoading(false)
@@ -43,9 +42,9 @@ export function BooksSearch() {
     setLoading(true)
 
     const dataBooks = await getBooksByName(queryName!!, page - 1)
-    setPageNumber(dataBooks.number)
+    setPageNumber(dataBooks.currentPage)
 
-    setBooks(dataBooks.content)
+    setBooks(dataBooks.item)
     setLoading(false)
   }
 

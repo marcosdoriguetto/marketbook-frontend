@@ -40,13 +40,13 @@ export function Header() {
       >
         <Grid item xs={2}>
           <Box className="header--item--box">
-            <Link to="/"><img className="header--logo" src="" alt="Logo" /></Link>
+            <Link to="/" onClick={() => setSearch('')}><img className="header--logo" src="" alt="Logo" /></Link>
           </Box>
         </Grid>
 
         <Grid item xs={6}>
           <Paper component="form" className="header--label" onSubmit={handlerSendSearch}>
-            <InputBase onChange={handlerChangeSearch} className="header--label--input" placeholder="Digite o nome do livro" />
+            <InputBase value={search} onChange={handlerChangeSearch} className="header--label--input" placeholder="Digite o nome do livro" />
             <IconButton type="submit">
               <SearchIcon />
             </IconButton>

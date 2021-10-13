@@ -2,11 +2,9 @@ import axios from 'axios'
 import { CustomerType } from './customer'
 
 export type BookResponse = {
-  content: BookType[]
+  item: BookType[]
   totalPages: number
-  number: number
-  first: boolean
-  last: boolean
+  currentPage: number
 }
 
 export type BookType = {
@@ -77,7 +75,7 @@ export async function getBooksStatus(status: string) {
         return error
       })
 
-  return data.content
+  return data
 }
 
 export async function postBook({ name, price, customerId }: BookPostType) {
