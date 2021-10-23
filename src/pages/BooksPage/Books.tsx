@@ -15,11 +15,11 @@ export function Books() {
     async function fetchBooks() {
       setLoading(true)
       const dataBooks = await getBooks()
-
       setTotalPages(dataBooks.totalPages)
       setPageNumber(dataBooks.currentPage)
 
       setBooks(dataBooks.item)
+
       setLoading(false)
     }
 
@@ -35,7 +35,6 @@ export function Books() {
     setLoading(false)
   }
 
-
   return (
     <>
       {
@@ -45,7 +44,6 @@ export function Books() {
               (books.length > 0 ? (
                 <div className="content--container">
                   <ListenBooks books={books} />
-
                   {
                     totalPages > 1 && <Pagination
                       shape="rounded"

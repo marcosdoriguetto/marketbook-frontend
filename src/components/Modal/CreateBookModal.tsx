@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { BookPostType, postBook } from "../../services/book";
-import { CustomerType, getCustomers } from "../../services/customer";
+import { CustomerInformationType, getCustomers } from "../../services/customer";
 import toast, { Toaster } from 'react-hot-toast';
 
 import './style.css'
@@ -40,11 +40,11 @@ export function CreateBookModal({ onClose = () => { } }: ModalOpenType) {
     customerId: '0'
   })
 
-  const [customers, setCustomers] = useState<CustomerType[]>([])
+  const [customers, setCustomers] = useState<CustomerInformationType[]>([])
 
   useEffect(() => {
     async function fetchData() {
-      const getAllCustomers: CustomerType[] = await getCustomers()
+      const getAllCustomers = await getCustomers()
 
       setCustomers(getAllCustomers)
     }

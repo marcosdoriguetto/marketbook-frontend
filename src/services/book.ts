@@ -1,7 +1,8 @@
-import axios from 'axios'
-import { CustomerType } from './customer'
 
-export type BookResponse = {
+import { CustomerInformationType } from './customer'
+import { api } from './api'
+
+export type BookResponseType = {
   item: BookType[]
   totalPages: number
   currentPage: number
@@ -12,7 +13,7 @@ export type BookType = {
   name: string
   price: number
   status: string
-  customer: CustomerType
+  customer: CustomerInformationType
 }
 
 export type BookPostType = {
@@ -21,75 +22,32 @@ export type BookPostType = {
   customerId: number
 }
 
-const url = "http://localhost:8080"
-
 export async function getBooks(page?: number) {
-  const data: BookResponse =
-    await axios.get(`${url}/books?page=${page}`)
-      .then(response => {
-        return response.data
-      })
-      .catch(error => {
-        return error
-      })
-
+  const { data } = await api.get<BookResponseType>(`/books?page=${page}`)
   return data
 }
 
 export async function getBooksByName(name: String, page?: number) {
-  const data: BookResponse =
-    await axios.get(`${url}/books?name=${name}&page=${page}`)
-      .then(response => {
-        return response.data
-      })
-      .catch(error => {
-        return error
-      })
-
+  const { data } = await api.get<BookResponseType>(`/books?name=${name}&page=${page}`)
   return data
 }
 
 export async function getBook(id: number) {
-  const data: BookType =
-    await axios.get(`${url}/books/${id}`)
-      .then(response => {
-        return response.data
-      })
-      .catch(error => {
-        if (error.response !== undefined) {
-          return error.response.status
-        }
-        return false
-      })
-
+  const { data } = await api.get<BookType>(`/books/${id}`)
   return data
 }
 
-export async function getBooksStatus(status: string) {
-  const data: BookResponse =
-    await axios.get(`${url}/books/${status}`)
-      .then(response => {
-        return response.data
-      })
-      .catch(error => {
-        return error
-      })
-
+export async function getBooksActives() {
+  const { data } = await api.get<BookType>(`/books/actives`)
   return data
 }
 
 export async function postBook({ name, price, customerId }: BookPostType) {
-  await axios.post(`${url}/books`, {
+  await api.post(`/books`, {
     name: name,
     price: price,
     customer_id: customerId
   })
-    .then(response => {
-      return response.data
-    })
-    .catch(error => {
-      return error
-    })
 }
 
 /*export const putCustomer: (customer: CustomerType) => void = customer => {
@@ -97,11 +55,5 @@ export async function postBook({ name, price, customerId }: BookPostType) {
 }*/
 
 export async function deleteBook(id: number) {
-  await axios.delete(`${url}/books/${id}`)
-    .then(response => {
-      return response.data
-    })
-    .catch(error => {
-      return error
-    })
+  await api.delete(`/books/${id}`)
 }

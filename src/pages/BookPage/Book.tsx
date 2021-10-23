@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Loading } from "../../components/Loading/Loading";
-import { BookType, getBook } from "../../services/book";
+import { BookResponseType, BookType, getBook } from "../../services/book";
 import { Error } from "../ErrorPage/Error";
 import { Divider } from "@material-ui/core";
 
@@ -25,8 +25,6 @@ export function Book() {
     price: 0,
     status: "",
     customer: {
-      id: 0,
-      email: "",
       name: ""
     }
   })
@@ -36,12 +34,14 @@ export function Book() {
 
   useEffect(() => {
     async function fetchBook() {
-      if (id !== undefined) {
-        const getBookId: BookType = await getBook(parseInt(id))
+      if (id !== undefined && !isNaN(parseInt(id))) {
+        const getBookId = await getBook(parseInt(id))
         if (!getBookId) {
           setError(true)
         }
         setBook(getBookId)
+      } else {
+        setError(true)
       }
       setLoading(false)
     }
